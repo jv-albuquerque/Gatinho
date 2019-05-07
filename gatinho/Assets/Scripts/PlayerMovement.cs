@@ -12,11 +12,11 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Checkers")]
     [Space]
-    [SerializeField] private Transform groundCheck; // object transform that will be used to see if the character is in the ground
+    [SerializeField] private Transform[] groundCheck; // object transform that will be used to see if the character is in the ground
     [SerializeField] private LayerMask layerGround; // Layer that will refer to the ground
     private bool grounded = false; //check if the player is on the ground and if it can jump
 
-    [SerializeField] private Transform wallCheck; // object transform that will be used to see if the character is in the ground
+    [SerializeField] private Transform[] wallCheck; // object transform that will be used to see if the character is in the ground
     [SerializeField] private LayerMask layerWall; // Layer that will refer to the wall
     private bool walled = false; //check if the player is on the wall
     private bool walledJump = false; //check if the jump was from the wall
@@ -33,13 +33,32 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        grounded = Physics2D.Linecast(transform.position, groundCheck.position, layerGround);
-        walled = Physics2D.Linecast(transform.position, wallCheck.position, layerWall);
-        if (grounded)
-            walled = false;
+        Checkers();
+        
+
+    }
+
+    //Verify all checkers to verify if the player is on ground or on the wall
+    private void Checkers()
+    {
+        grounded = false;
+        walled = false;
+
+        for (int i = 0; i < groundCheck.Length; i++)
+        {
+            if (Physics2D.Linecast(transform.position, groundCheck[i].position, layerGround))
+                grounded = true;
+        }
+
+        if(!grounded)
+            for (int i = 0; i < wallCheck.Length; i++)
+            {
+                if (Physics2D.Linecast(transform.position, wallCheck[i].position, layerWall))
+                    walled = true;
+            }
+
         if (grounded || walled)
             walledJump = false;
-
     }
 
     public void Move(float move, bool jump)
