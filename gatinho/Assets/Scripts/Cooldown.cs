@@ -32,7 +32,7 @@
         }
     }
 
-    public void SetTime(int _time)
+    public void SetTime(float _time)
     {
         time = _time;
     }
