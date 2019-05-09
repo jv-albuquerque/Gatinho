@@ -34,8 +34,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Checkers();
-        
-
     }
 
     //Verify all checkers to verify if the player is on ground or on the wall
