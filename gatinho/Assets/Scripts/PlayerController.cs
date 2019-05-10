@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerMovement playerMovement;
+    private GameController gameController;
 
     private float horizontalMove;
     private bool jump = false;
@@ -12,7 +13,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
     }
 
     // Update is called once per frame
@@ -25,6 +26,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
+        }
+
+        // get the input to pause the game
+        if(Input.GetButtonDown("Pause"))
+        {
+            gameController.Pause();
         }
     }
 

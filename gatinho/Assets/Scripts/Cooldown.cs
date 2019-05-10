@@ -57,13 +57,16 @@ public class Cooldown
     /// <summary>
     /// Return the percent of the cooldown
     /// </summary>
-    public int Percent()
+    public float Percent()
     {
-        return 100 - ((int)(((timer - Time.time)/time)*100));
+        return 100 - (((timer - Time.time)/time)*100);
     }
 
-    public int TimeLeft()
+    /// <summary>
+    /// Return how many time is left to finish the cooldown
+    /// </summary>
+    public float TimeLeft()
     {
-        return (int)(timer - Time.time);
+        return (timer - Time.time);
     }
 }
