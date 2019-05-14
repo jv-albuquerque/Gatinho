@@ -155,4 +155,11 @@ public class PlayerMovement : MonoBehaviour
             specialPlatforms[i].GetComponent<Collider2D>().enabled = true;
         }
     }
+
+    public void FindSpecialObject()
+    {
+        rb2D.gravityScale = 0;
+        rb2D.velocity *= 0.1f;
+        walledJump = true;
+    }
 }

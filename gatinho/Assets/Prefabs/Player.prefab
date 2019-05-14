@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 114112788107608350}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   - {fileID: 3646879686124761986}
   layerGround:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768
   wallCheck:
   - {fileID: 4269290127158630}
   - {fileID: 3644953066332410472}
