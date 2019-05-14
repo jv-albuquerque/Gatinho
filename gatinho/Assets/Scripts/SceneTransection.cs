@@ -15,16 +15,16 @@ public class SceneTransection : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             player.GetComponent<PlayerMovement>().FindSpecialObject();
-            //Make particles go out from the object
-            //make the camera zoom into the player
-            //change to the next stage
+            // TODO: Make particles go out from the object
+            // TODO: make the camera zoom into the player
+            // TODO: change to the next stage
             Invoke("ChangeScene", 1f);
         }
     }
 
     private void ChangeScene()
     {
-        //Go to the load screen
+        //Go to the comic scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

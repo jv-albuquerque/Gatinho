@@ -3,10 +3,15 @@
 public class Cooldown
 {
 
-    private float time;
-    private float timer;
+    private float time; // time length of the cooldown
+    private float timer; // the variable used to count
 
-    private bool finished = true;
+    // PAUSE VARIABLES
+    private bool paused = false; // the cooldown is paused?
+    private float pauseGap = 0; // store the amount remainder to finish
+    private float pausePercent; // store the percent of the cooldown when was paused
+    private float pauseTimeLeft; // store the time left of the cooldown when was paused
+
 
     /// <summary>
     /// Constructor of the class with param
@@ -32,6 +37,9 @@ public class Cooldown
     /// </summary>
     public bool IsFinished()
     {
+        if (paused)
+            return false;
+
         if (Time.time - timer >= 0)
             return true;
         return false;
@@ -42,6 +50,9 @@ public class Cooldown
     /// </summary>
     public void Start()
     {
+        if (paused)
+            paused = false;
+
         timer = time + Time.time;
     }
 
@@ -59,6 +70,12 @@ public class Cooldown
     /// </summary>
     public float Percent()
     {
+        if (paused)
+            return pausePercent;
+
+        if (this.IsFinished())
+            return 100;
+
         return 100 - (((timer - Time.time)/time)*100);
     }
 
@@ -67,6 +84,55 @@ public class Cooldown
     /// </summary>
     public float TimeLeft()
     {
+        if (paused)
+            return pauseTimeLeft;
+
+        if (this.IsFinished())
+            return 0;
+
         return (timer - Time.time);
+    }
+
+    /// <summary>
+    /// Pause the cooldown
+    /// </summary>
+    public void Pause()
+    {
+        if (this.IsFinished())
+            return;
+
+        pauseGap = timer - Time.time;
+        pausePercent = this.Percent();
+        pauseTimeLeft = this.TimeLeft();
+        paused = true;
+    }
+
+    /// <summary>
+    /// Reset from pause
+    /// </summary>
+    public void Restart()
+    {
+        if (!paused)
+            return;
+
+        paused = false;
+        timer = Time.time + pauseGap;
+    }
+
+    /// <summary>
+    /// Force the cooldown to finish
+    /// </summary>
+    public void ForceFinish()
+    {
+        timer = 0;
+        paused = false;
+    }
+
+    /// <summary>
+    /// Reset the cooldown to the zero percent
+    /// </summary>
+    public void Reset()
+    {
+        this.Start();
     }
 }
