@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,7 +23,10 @@ public class PlayerController : MonoBehaviour
         // Get the input to jump
         if (Input.GetButtonDown("Jump"))
         {
-            jump = true;
+            if (Input.GetAxisRaw("Vertical") == -1)
+                playerMovement.JumpDown();
+            else
+                jump = true;
         }
 
         // get the input to pause the game

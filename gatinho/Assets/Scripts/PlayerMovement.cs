@@ -26,9 +26,16 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb2D;
     private Vector3 velocity = Vector3.zero;
 
+    private GameObject[] specialPlatforms; //there is all the special platforms game objects
+
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        specialPlatforms = GameObject.FindGameObjectsWithTag("SpecialPlatform");
     }
 
     void Update()
@@ -104,6 +111,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void JumpDown()
+    {
+        if(grounded)
+        {
+            DesableSpecialPlatform();
+
+            Invoke("EnableSpecialPlatform", 0.5f);
+        }
+    }
+
     private void Flip()
     {
         // Switch the way the player is facing.
@@ -121,5 +138,21 @@ public class PlayerMovement : MonoBehaviour
         if (collision.tag.Equals("Ground"))
             grounded = true;
             */
+    }
+
+    private void DesableSpecialPlatform()
+    {
+        for (int i = 0; i < specialPlatforms.Length; i++)
+        {
+            specialPlatforms[i].GetComponent<Collider2D>().enabled = false;
+        }
+    }
+
+    private void EnableSpecialPlatform()
+    {
+        for (int i = 0; i < specialPlatforms.Length; i++)
+        {
+            specialPlatforms[i].GetComponent<Collider2D>().enabled = true;
+        }
     }
 }

@@ -64,6 +64,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -174,7 +175,7 @@ MonoBehaviour:
   - {fileID: 3644953066332410472}
   layerWall:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 256
   wallJumpForce: 50
 --- !u!1 &1795771256081938
 GameObject:
