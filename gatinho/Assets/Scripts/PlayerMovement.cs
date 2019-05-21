@@ -28,9 +28,12 @@ public class PlayerMovement : MonoBehaviour
 
     private GameObject[] specialPlatforms; //there is all the special platforms game objects
 
+    private Animator anim; //The character animator
+
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void Start()
@@ -41,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Checkers();
+        SetAnim();
     }
 
     //Verify all checkers to verify if the player is on ground or on the wall
@@ -55,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
                 grounded = true;
         }
 
-        if(!grounded)
+        if (!grounded)
             for (int i = 0; i < wallCheck.Length; i++)
             {
                 if (Physics2D.Linecast(transform.position, wallCheck[i].position, layerWall))
@@ -64,6 +68,36 @@ public class PlayerMovement : MonoBehaviour
 
         if (grounded || walled)
             walledJump = false;
+
+
+    }
+
+    private void SetAnim()
+    {
+        if(grounded)
+        {
+            anim.SetBool("OnGround", true);
+            anim.SetBool("OnWall", false);
+            anim.SetBool("IsFalling", false);
+        }
+        else
+        {
+            anim.SetBool("OnGround", false);
+        }
+
+        if(walled)
+        {
+            anim.SetBool("IsFalling", false);
+        }
+
+        if (!walled && !grounded && rb2D.velocity.y <= 0)
+        {
+            anim.SetBool("OnWall", false);
+            anim.SetTrigger("IsFalling");
+        }
+
+
+
     }
 
     public void Move(float move, bool jump)
@@ -80,6 +114,8 @@ public class PlayerMovement : MonoBehaviour
             Vector3 targetVelocity = new Vector2(move * moveSpeed * 10, rb2D.velocity.y);
             // And then smoothing it out and applying it to the character
             rb2D.velocity = Vector3.SmoothDamp(rb2D.velocity, targetVelocity, ref velocity, movementSmoothing);
+            float tmp = move*move*1000;
+            anim.SetFloat("Speed", tmp);
         }
 
         //case the player is on the wall and not in the ground
@@ -87,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
         if(!grounded && walled && 
           ((move > 0 && facingRight) || (move < 0 && !facingRight)))
         {
+            anim.SetBool("OnWall", true);
             rb2D.velocity = new Vector2(0f, -walledDownSpeed/10);
             if (jump)
             {
@@ -99,6 +136,8 @@ public class PlayerMovement : MonoBehaviour
                 rb2D.AddForce(new Vector2(moveSpeed * 10 * force, jumpForce * 10));
                 Flip();
                 walledJump = true;
+                anim.SetTrigger("Jumping");
+                anim.SetBool("OnWall", false);
             }
 
         }
@@ -108,6 +147,8 @@ public class PlayerMovement : MonoBehaviour
         {
             grounded = false;
             rb2D.AddForce(new Vector2(0f, jumpForce*10));
+            anim.SetBool("OnGround", false);
+            anim.SetTrigger("JumpingGround");
         }
     }
 
