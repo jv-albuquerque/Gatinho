@@ -2,8 +2,8 @@
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement playerMovement;
-    private GameController gameController;
+    [SerializeField] private PlayerMovement playerMovement = null;
+    private GameController gameController = null;
 
     private float horizontalMove;
     private bool jump = false;

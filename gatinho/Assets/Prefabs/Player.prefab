@@ -199,7 +199,6 @@ MonoBehaviour:
   layerWall:
     serializedVersion: 2
     m_Bits: 256
-  wallJumpForce: 50
 --- !u!1 &1795771256081938
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +223,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795771256081938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.128, y: -0.144, z: 0}
+  m_LocalPosition: {x: -0.091, y: -0.144, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4355534349182304}
@@ -314,7 +313,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6198561905352736475}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.111, y: -0.153, z: 0}
+  m_LocalPosition: {x: 0.15, y: -0.153, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4355534349182304}
@@ -344,7 +343,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7220878111862499504}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.15, y: -0.159, z: 0}
+  m_LocalPosition: {x: 0.15, y: -0.101, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4355534349182304}

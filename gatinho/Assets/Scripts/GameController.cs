@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private GameObject canvasPause;
-    [SerializeField] private GameObject canvasMainPause;
-    [SerializeField] private GameObject canvasSettings;
+    [SerializeField] private GameObject canvasPause = null;
+    [SerializeField] private GameObject canvasMainPause = null;
+    [SerializeField] private GameObject canvasSettings = null;
 
     private bool isPaused = false;
 

@@ -9,9 +9,33 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 4420fbe5518a3de4c8e4335c9f41a170
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 1f94e135f1366744e9e4f4cc3090f8dc
+    path: Assets/Scenes/SelectLevel.unity
+    guid: 0a428e79a6b85454397f2e2603344e75
   - enabled: 1
-    path: Assets/Scenes/Testes.unity
-    guid: 8462e6c4891b07d47900e103bf4c00f4
+    path: Assets/Scenes/Comic0.unity
+    guid: 02de71ace92d4564bb4fe71c848647c8
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: 4b9dd10af03fe5d44a713ffa5d91ae46
+  - enabled: 1
+    path: Assets/Scenes/Comic1.unity
+    guid: 370f5079ecf6bf9428f790ae1fffb496
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: f9d75f67a86a6654ca75f59f25f5bd8d
+  - enabled: 1
+    path: Assets/Scenes/Comic2.unity
+    guid: 7c9e3d53203d2d645ae3002b58472a4d
+  - enabled: 1
+    path: Assets/Scenes/Level3.unity
+    guid: 700d156ac6b309246a2ad303b8d21067
+  - enabled: 1
+    path: Assets/Scenes/Comic3.unity
+    guid: ae8398a4874a07c46a50b0ed31d60fe4
+  - enabled: 1
+    path: Assets/Scenes/Level4.unity
+    guid: 77c99aafb80f18747975eea91419d66d
+  - enabled: 1
+    path: Assets/Scenes/Comic4.unity
+    guid: 4fd247d31872b49499d496dcd18a6da0
   m_configObjects: {}

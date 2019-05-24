@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransection : MonoBehaviour
 {
-    private GameObject player;
+    private GameObject player = null;
 
     private void Start()
     {

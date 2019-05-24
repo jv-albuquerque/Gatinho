@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
-    private Transform playerTransform;
+    private Transform playerTransform = null;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerTransform = player.GetComponent<Transform>();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     // Update is called once per frame

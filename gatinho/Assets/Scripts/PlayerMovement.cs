@@ -12,23 +12,22 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Checkers")]
     [Space]
-    [SerializeField] private Transform[] groundCheck; // object transform that will be used to see if the character is in the ground
-    [SerializeField] private LayerMask layerGround; // Layer that will refer to the ground
+    [SerializeField] private Transform[] groundCheck = null; // object transform that will be used to see if the character is in the ground
+    [SerializeField] private LayerMask layerGround = ~0; // Layer that will refer to the ground
     private bool grounded = false; //check if the player is on the ground and if it can jump
 
-    [SerializeField] private Transform[] wallCheck; // object transform that will be used to see if the character is in the ground
-    [SerializeField] private LayerMask layerWall; // Layer that will refer to the wall
+    [SerializeField] private Transform[] wallCheck = null; // object transform that will be used to see if the character is in the ground
+    [SerializeField] private LayerMask layerWall = ~0; // Layer that will refer to the wall
     private bool walled = false; //check if the player is on the wall
     private bool walledJump = false; //check if the jump was from the wall
-    [SerializeField] private float wallJumpForce = 50;
 
     private bool facingRight = true; //store where the player is looking
-    private Rigidbody2D rb2D;
+    private Rigidbody2D rb2D = null;
     private Vector3 velocity = Vector3.zero;
 
     private GameObject[] specialPlatforms; //there is all the special platforms game objects
 
-    private Animator anim; //The character animator
+    private Animator anim = null; //The character animator
 
     private void Awake()
     {

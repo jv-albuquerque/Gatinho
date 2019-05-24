@@ -8,9 +8,9 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour
 {
     //Menus
-    [SerializeField] private GameObject canvasMainMenu;
-    [SerializeField] private GameObject canvasCredits;
-    [SerializeField] private GameObject canvasSettings;
+    [SerializeField] private GameObject canvasMainMenu = null;
+    [SerializeField] private GameObject canvasCredits = null;
+    [SerializeField] private GameObject canvasSettings = null;
 
     //Checkers
     private bool mainMenu;

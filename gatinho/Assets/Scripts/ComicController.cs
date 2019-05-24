@@ -4,10 +4,10 @@ using UnityEngine.SceneManagement;
 public class ComicController : MonoBehaviour
 {
     [Header("Frames")]
-    [SerializeField] private GameObject[] frames;
+    [SerializeField] private GameObject[] frames = null;
     private float[] framesY;
     [Header("Parameters")]
-    [SerializeField] private Transform centerPoint;
+    [SerializeField] private Transform centerPoint = null;
     [SerializeField] private float speedUp = 10;
     [SerializeField] private float cooldownToNextFrame = 1;
 
