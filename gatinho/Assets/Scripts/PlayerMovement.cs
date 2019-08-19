@@ -45,8 +45,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Checkers();
         SetAnim();
-
-        Debug.Log(wallJumpingRight);
     }
 
     //Verify all checkers to verify if the player is on ground or on the wall
