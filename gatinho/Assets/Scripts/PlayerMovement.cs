@@ -120,7 +120,8 @@ public class PlayerMovement : MonoBehaviour
         //case the player is on the wall and not in the ground
         //and is pressing to the wall
         if(!grounded && walled && 
-          ((move > 0 && facingRight) || (move < 0 && !facingRight)))
+          ((move > 0 && facingRight) || (move < 0 && !facingRight))
+          && IsFalling)
         {
             anim.SetBool("OnWall", true);
             rb2D.velocity = new Vector2(0f, -walledDownSpeed/10);
@@ -201,5 +202,13 @@ public class PlayerMovement : MonoBehaviour
         rb2D.gravityScale = 0;
         rb2D.velocity *= 0.1f;
         walledJump = true;
+    }
+
+    private bool IsFalling
+    {
+        get
+        {
+            return rb2D.velocity.y < 0;
+        }
     }
 }
