@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool facingRight = true; //store where the player is looking
     private Rigidbody2D rb2D = null;
-    private bool wallJumpingRight = false; // If the wall jump is to the right
     private Vector3 velocity = Vector3.zero;
 
     private GameObject[] specialPlatforms; //there is all the special platforms game objects
@@ -128,20 +127,16 @@ public class PlayerMovement : MonoBehaviour
             else if (rb2D.velocity.x < 0 && facingRight)
                 Flip();
 
-            if (wallJumpingRight)
-            {
-                if (move > 0)
-                    rb2D.velocity = new Vector2(rb2D.velocity.x + .01f, rb2D.velocity.y);
-                else if (move < 0)
-                    rb2D.velocity = new Vector2(rb2D.velocity.x - .07f, rb2D.velocity.y);
-            }
-            else
-            {
-                if (move > 0)
-                    rb2D.velocity = new Vector2(rb2D.velocity.x + .07f, rb2D.velocity.y);
-                else if (move < 0)
-                    rb2D.velocity = new Vector2(rb2D.velocity.x - .01f, rb2D.velocity.y);
-            }
+            float airVelocity = rb2D.velocity.x;
+
+            if (move > 0)
+                airVelocity = rb2D.velocity.x + .07f;
+            else if (move < 0)
+                airVelocity = rb2D.velocity.x - .07f;
+
+            Mathf.Clamp(airVelocity, -1.6f, 1.6f);
+
+            rb2D.velocity = new Vector2(airVelocity, rb2D.velocity.y);
         }
 
 
@@ -170,15 +165,9 @@ public class PlayerMovement : MonoBehaviour
                 rb2D.velocity = new Vector2(0f, 0f);
                 float force;
                 if (facingRight)
-                {
                     force = -1;
-                    wallJumpingRight = false;
-                }
                 else
-                {
                     force = 1;
-                    wallJumpingRight = true;
-                }
 
                 rb2D.AddForce(new Vector2(moveSpeed * 10 * force, jumpForce * 10));
                 Flip();
