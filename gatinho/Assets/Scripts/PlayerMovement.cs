@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool facingRight = true; //store where the player is looking
     private Rigidbody2D rb2D = null;
+    private bool wallJumpingRight = false; // If the wall jump is to the right
     private Vector3 velocity = Vector3.zero;
 
     private GameObject[] specialPlatforms; //there is all the special platforms game objects
@@ -44,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Checkers();
         SetAnim();
+
+        Debug.Log(wallJumpingRight);
     }
 
     //Verify all checkers to verify if the player is on ground or on the wall
@@ -113,42 +116,78 @@ public class PlayerMovement : MonoBehaviour
             Vector3 targetVelocity = new Vector2(move * moveSpeed * 10, rb2D.velocity.y);
             // And then smoothing it out and applying it to the character
             rb2D.velocity = Vector3.SmoothDamp(rb2D.velocity, targetVelocity, ref velocity, movementSmoothing);
+
+            //Make it a positive number and a big number to the animator can see if the character is moving
             float tmp = move*move*1000;
             anim.SetFloat("Speed", tmp);
         }
+        //case if the player whants to move in the air
+        else
+        {
+            // flip the player where it is moving
+            if (rb2D.velocity.x > 0 && !facingRight)
+                Flip();
+            else if (rb2D.velocity.x < 0 && facingRight)
+                Flip();
+
+            if (wallJumpingRight)
+            {
+                if (move > 0)
+                    rb2D.velocity = new Vector2(rb2D.velocity.x + .01f, rb2D.velocity.y);
+                else if (move < 0)
+                    rb2D.velocity = new Vector2(rb2D.velocity.x - .07f, rb2D.velocity.y);
+            }
+            else
+            {
+                if (move > 0)
+                    rb2D.velocity = new Vector2(rb2D.velocity.x + .07f, rb2D.velocity.y);
+                else if (move < 0)
+                    rb2D.velocity = new Vector2(rb2D.velocity.x - .01f, rb2D.velocity.y);
+            }
+        }
+
 
         //case the player is on the wall and not in the ground
         //and is pressing to the wall
-        if(!grounded && walled && 
+        if (!grounded && walled && 
           ((move > 0 && facingRight) || (move < 0 && !facingRight))
           && IsFalling)
         {
             anim.SetBool("OnWall", true);
             rb2D.velocity = new Vector2(0f, -walledDownSpeed/10);
-            if (jump)
+        }
+
+
+        if(jump)
+        {
+            if (grounded)
             {
-                rb2D.velocity = new Vector2(0f,0f);
+                grounded = false;
+                rb2D.AddForce(new Vector2(0f, jumpForce * 10));
+                anim.SetBool("OnGround", false);
+                anim.SetTrigger("JumpingGround");
+            }
+            else if(walled)
+            {
+                rb2D.velocity = new Vector2(0f, 0f);
                 float force;
                 if (facingRight)
+                {
                     force = -1;
+                    wallJumpingRight = false;
+                }
                 else
+                {
                     force = 1;
+                    wallJumpingRight = true;
+                }
+
                 rb2D.AddForce(new Vector2(moveSpeed * 10 * force, jumpForce * 10));
                 Flip();
                 walledJump = true;
                 anim.SetTrigger("Jumping");
                 anim.SetBool("OnWall", false);
             }
-
-        }
-
-
-        if(jump && grounded)
-        {
-            grounded = false;
-            rb2D.AddForce(new Vector2(0f, jumpForce*10));
-            anim.SetBool("OnGround", false);
-            anim.SetTrigger("JumpingGround");
         }
     }
 
